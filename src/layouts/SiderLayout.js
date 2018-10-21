@@ -23,7 +23,7 @@ class SiderLayout extends React.Component {
           collapsible
           collapsed={this.state.collapsed}
         >
-          <div className="logo" />
+          <div className={styles["logo"]} />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="articles">
               <Icon type="user" />
