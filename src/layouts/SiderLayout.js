@@ -29,6 +29,10 @@ class SiderLayout extends React.Component {
               <Icon type="user" />
               <span><Link to="/admin/articles">文章管理</Link></span>
             </Menu.Item>
+            <Menu.Item key="category">
+              <Icon type="video-camera" />
+              <span><Link to="/admin/category">分类管理</Link></span>
+            </Menu.Item>
             <Menu.Item key="users">
               <Icon type="video-camera" />
               <span><Link to="/admin/articles">账户管理</Link></span>

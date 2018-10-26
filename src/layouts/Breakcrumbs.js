@@ -8,6 +8,8 @@ const routes = [
   { path: '/admin/articles', breadcrumb: 'articles' },
   { path: '/admin/articles/new', breadcrumb: 'new' },
   { path: '/admin/articles/:id', breadcrumb: 'edit' },
+  { path: '/admin/category', breadcrumb: 'category' },
+  { path: '/admin/category/:id', breadcrumb: 'edit' },
 ];
 
 export default withBreadcrumbs(routes)(({ breadcrumbs }) => (
