@@ -13,3 +13,15 @@
   color: white;
   margin: 0;
 }
+
+.login{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border: 1 solid red;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+  background-color: whitesmoke
+  /* margin-left: 100px */
+}

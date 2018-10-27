@@ -1,7 +1,7 @@
 import fetch from 'dva/fetch';
 import {message} from "antd"
-
-
+import cookie from 'react-cookies'
+import router from 'umi/router';
 const prefixUrl = "/api/v1"
 /**
  * Requests a URL, returning a promise.
@@ -13,9 +13,11 @@ const prefixUrl = "/api/v1"
 export default async function request(url, options={}) {
   url = prefixUrl + url 
   console.log(url, "url")
+  
   options.headers = {
     'Accept': 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    "authorization": cookie.load("token")
   };
   const response = await fetch(url, options);
   const status = response.status;
@@ -23,6 +25,8 @@ export default async function request(url, options={}) {
   const res = await response.json()
   if (status >= 200 && status < 300) {
     return res;
+  }else if(status==401){
+    router.push("/login")
   }else{
       message.error(res["message"]);
   }
