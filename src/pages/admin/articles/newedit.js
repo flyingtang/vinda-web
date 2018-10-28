@@ -4,7 +4,7 @@ import * as article from "../../../servies/article"
 import styles from './new.css';
 import * as category from "../../../servies/category"
 import router from 'umi/router';
-
+import PicturesWall from "./PicturesWall"
 
 
 const FormItem = Form.Item;
@@ -164,7 +164,7 @@ class NEArticle extends React.Component {
              initialValue: article.categoryId || (categories && categories[0]&&categories[0].id)
          })(
             <Select >
-               {categories.map(cat => <Option value={cat.id}>{cat.name}</Option>)}
+               {categories.map(cat => <Option key={cat.id} value={cat.id}>{cat.name}</Option>)}
             </Select>
          )}
         </FormItem>
@@ -188,7 +188,16 @@ class NEArticle extends React.Component {
             <MyEditor></MyEditor>
           )}
         </FormItem>
-
+        <FormItem
+          {...formItemLayout}
+          label="文章主图"
+        >
+          {getFieldDecorator('mainpic', {
+            initialValue: article.description
+          })(
+            <PicturesWall />
+          )}
+        </FormItem>
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">{id?"更新":"创建"}</Button>
         </FormItem>

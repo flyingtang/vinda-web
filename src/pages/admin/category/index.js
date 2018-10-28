@@ -62,14 +62,7 @@ class CategoryList extends React.Component{
 
 
   componentDidMount(){
-    console.log("123")
-    category.find().then(res=>{
-      console.log("data", res)
-      const {data=[], total} = res
-      this.setState({articles: data, total: total})
-    }).catch(err=>{
-      console.log(err)
-    })
+    this.fetch()
   }
 
   fetch =()=>{
@@ -77,7 +70,7 @@ class CategoryList extends React.Component{
       category.find().then(res=>{
         console.log("data", res)
         const {data=[], total} = res
-        this.setState({articles: data, total: total, loading: false})
+        this.setState({articles: data, total: total})
       }).finally(err=>{
         this.setState({loading: false})
       })
