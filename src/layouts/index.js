@@ -4,8 +4,16 @@ import cookie from 'react-cookies'
 import router from 'umi/router';
 import Article from "./ArticleLayout/articleLayout"
 function BasicLayout(props) {
+
   const url = props.location.pathname
- if (url.indexOf("/admin") > -1) {
+
+  if (url=="/"){
+    router.push("/article")
+
+  } else if (url == "/admin") {
+    router.push("/admin/articles")
+    
+  } else if (url.indexOf("/admin") > -1) {
     return (
          <SiderLayout>
           { props.children }

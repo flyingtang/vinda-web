@@ -22,8 +22,6 @@ class NEArticle extends React.Component {
     article : {},
     categories: [],
     fileList:[],
-    previewVisible: false,
-    previewImage: '',
     };
   }
   
@@ -47,7 +45,8 @@ class NEArticle extends React.Component {
     article.findById(id).then(res=>{
       console.log("findbyId ", res)
       if (res && res.data){
-        this.setState({article: res.data, fileList:[{url: res.data.mainPic}]})
+        // this.setState({article: res.data, fileList:[{url: `http://127.0.0.1:3000/${res.data.mainPic}`,uid :id}]})
+        this.setState({article: res.data, fileList:[{url: res.data.mainPic,uid :id}]})
       }
     })
   }
@@ -59,11 +58,12 @@ class NEArticle extends React.Component {
         return
       }
       const {id} =  this.props;
-      console.log(values, "121212")
-      const mainpic = values && values.mainPic && values.mainPic[0] && values.mainPic[0].response && values.mainPic[0].response.url 
-      console.log(mainpic, "1212")
+      console.log(values, "121212",this.state)
+      const mainPic = this.state.fileList[0] && (this.state.fileList[0].response && this.state.fileList[0].response.url || this.state.fileList[0].url)
+      // const mainpic = values && values.mainPic && values.mainPic[0] && values.mainPic[0].response && values.mainPic[0].response.url 
+      console.log(mainPic, "1212")
       
-      values.mainPic = mainpic;
+      values.mainPic = mainPic;
       console.log(values)
         // 编辑
       if (id) {
@@ -217,7 +217,7 @@ class NEArticle extends React.Component {
           {getFieldDecorator('mainPic', {
             initialValue: article.mainPic
           })(
-            <PicturesWall />
+            <PicturesWall fileList={this.state.fileList} handleChange={this.handleChange}/>
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
