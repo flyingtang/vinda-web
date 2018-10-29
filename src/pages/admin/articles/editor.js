@@ -10,7 +10,7 @@ class MyEditor extends React.Component {
 		this.modules = {
 			toolbar: [
 				[{ 'header': [1, 2, false] }],
-				['bold', 'italic', 'underline','strike', 'blockquote'],
+				['bold', 'italic', 'underline','strike', 'blockquote', 'code-block'],
 				[{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
 				['link', 'image'],
 				['clean']
@@ -18,10 +18,10 @@ class MyEditor extends React.Component {
 		};
 	
 		this.formats = [
-			'header',
+			'header', 'font', 'size',
 			'bold', 'italic', 'underline', 'strike', 'blockquote',
 			'list', 'bullet', 'indent',
-			'link', 'image'
+			'link', 'image', 'color', 'code-block',
 		]
 	}
 

@@ -1,12 +1,19 @@
 import styles from "./index.less"
 import moment  from "moment"
-import { Divider } from 'antd';
+import router from 'umi/router'
 
 export default class ArticleSnapshot extends React.Component {
+
+    cliickHancle = (id)=>{
+        console.log(id)
+        console.log("cliickHancle", id)
+        const url = `/article/${id}`
+        router.push(url)
+    }
     render(){
-        const {article:{title, mainPic, description, createdAt}={}} = this.props;
+        const {article:{title, mainPic, description, createdAt, id}={}} = this.props;
         return (
-        <div className={styles["snapshot"]}>
+        <div className={styles["snapshot"]} onClick={this.cliickHancle.bind(this, id)} >
             <div className={styles["row1"]}>
                     {title}
             </div>

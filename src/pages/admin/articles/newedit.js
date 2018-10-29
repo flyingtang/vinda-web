@@ -20,7 +20,10 @@ class NEArticle extends React.Component {
     confirmDirty: false,
     autoCompleteResult: [],
     article : {},
-    categories: []
+    categories: [],
+    fileList:[],
+    previewVisible: false,
+    previewImage: '',
     };
   }
   
@@ -44,7 +47,7 @@ class NEArticle extends React.Component {
     article.findById(id).then(res=>{
       console.log("findbyId ", res)
       if (res && res.data){
-        this.setState({article: res.data})
+        this.setState({article: res.data, fileList:[{url: res.data.mainPic}]})
       }
     })
   }
@@ -114,6 +117,20 @@ class NEArticle extends React.Component {
   }
 
 
+  handleChange = ({ fileList }) =>{
+    console.log(fileList, "123你大爷222");
+    // this.props.onChange(fileList)
+    this.setState({ fileList })
+  }
+
+  handleCancel = () => this.setState({ previewVisible: false })
+
+  handlePreview = (file) => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    });
+  }
 
 
   render() {
