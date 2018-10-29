@@ -8,15 +8,14 @@ const { Header, Sider, Content } = Layout;
 
 
 export default class InterfaceLayout extends React.Component {
-
-
     render (){
         return (
             <div className={styles["layout"]}>  
-                    <CustomHeader />
+                    <div> <CustomHeader /></div>
+                    <Divider className={styles["divider"]}/>
                     <div className={styles["body"]}>
-                        <Left />
-                        <Divider  type="vertical"/>
+                        <Left {...this.props}/>
+                        <Divider className={styles["divider"]} type="vertical"/>
                         <Right />
                     </div>
             </div>

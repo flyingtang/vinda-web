@@ -56,6 +56,12 @@ class NEArticle extends React.Component {
         return
       }
       const {id} =  this.props;
+      console.log(values, "121212")
+      const mainpic = values && values.mainPic && values.mainPic[0] && values.mainPic[0].response && values.mainPic[0].response.url 
+      console.log(mainpic, "1212")
+      
+      values.mainPic = mainpic;
+      console.log(values)
         // 编辑
       if (id) {
         article.update(id, values).then(res=>{
@@ -68,9 +74,8 @@ class NEArticle extends React.Component {
         article.create(values).then((res)=>{
           console.log("res", res)
           message.success("创建成功")
-          this.props.form.resetFields();
-          this.setState({ visible: false, selectRecord:{}});
-          // router.go(-1)
+          // this.props.form.resetFields();
+        
         })
       }
     });
@@ -192,8 +197,8 @@ class NEArticle extends React.Component {
           {...formItemLayout}
           label="文章主图"
         >
-          {getFieldDecorator('mainpic', {
-            initialValue: article.description
+          {getFieldDecorator('mainPic', {
+            initialValue: article.mainPic
           })(
             <PicturesWall />
           )}

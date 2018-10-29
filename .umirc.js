@@ -20,6 +20,11 @@ export default {
       "target": "http://127.0.0.1:3000",
       "changeOrigin": true,
       // "pathRewrite": { "^/api" : "" }
-    }
+    },
+    "/static": {
+      "target": "http://127.0.0.1:3000",
+      // "target": "https://pre.k11-central-server.wosoft.me/",
+      "changeOrigin": true
+    },
   },
 }
