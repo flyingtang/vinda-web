@@ -15,7 +15,7 @@ export default class InterfaceLayout extends React.Component {
                     <Divider className={styles["divider"]}/>
                     <div className={styles["body"]}>
                         <Left {...this.props}/>
-                        <Divider className={styles["divider"]} type="vertical"/>
+                        <Divider className={styles["fenge"]} type="vertical"/>
                         <Right />
                     </div>
             </div>
