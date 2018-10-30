@@ -11,24 +11,28 @@ const prefixUrl = "/api/v1"
  * @return {object}           An object containing either "data" or "err"
  */
 export default async function request(url, options={}) {
-  url = prefixUrl + url 
-  console.log(url, "url")
-  
-  options.headers = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    "authorization": cookie.load("token")
-  };
-  const response = await fetch(url, options);
-  const status = response.status;
-  console.log(status, "status")
-  const res = await response.json()
-  if (status >= 200 && status < 300) {
-    return res;
-  }else if(status==401){
-    router.push("/login")
-  }else{
-      message.error(res["message"]);
+  try {
+      url = prefixUrl + url 
+        console.log(url, "url")
+        
+        options.headers = {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          "authorization": cookie.load("token")
+        };
+        const response = await fetch(url, options);
+        const status = response.status;
+      
+        const res = await response.json()
+        if (status >= 200 && status < 300) {
+          return res;
+        }else if(status==401){
+          router.push("/login")
+        }else{
+            message.error(res["message"]);
+        }
+  }catch(err) {
+    message.error("数据请求出错啦");
   }
 }
 

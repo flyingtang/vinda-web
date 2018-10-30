@@ -5,8 +5,7 @@ import router from 'umi/router'
 export default class ArticleSnapshot extends React.Component {
 
     cliickHancle = (id)=>{
-        console.log(id)
-        console.log("cliickHancle", id)
+      
         const url = `/article/${id}`
         router.push(url)
     }

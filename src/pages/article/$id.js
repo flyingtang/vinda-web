@@ -14,7 +14,7 @@ export default class Article extends React.Component {
         const id = this.props.match.params && this.props.match.params.id;
        if (id){
         article.findById(id).then(res=>{
-            console.log(res, "res")
+          
             if (res && res.data) {
                 this.setState({article: res.data})
             }

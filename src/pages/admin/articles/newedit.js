@@ -22,6 +22,7 @@ class NEArticle extends React.Component {
     article : {},
     categories: [],
     fileList:[],
+    isMarkdown: false,
     };
   }
   
@@ -34,6 +35,12 @@ class NEArticle extends React.Component {
     }
     this.findCategories()
   }
+
+  buttonClick = () => {
+		const {isMarkdown} = this.state;
+		this.setState({isMarkdown: !isMarkdown})
+  }
+  
   findCategories = ()=>{
     category.find().then(res=>{
       if (res && res.data){
@@ -43,10 +50,14 @@ class NEArticle extends React.Component {
   }
   findById = (id) => {
     article.findById(id).then(res=>{
-      console.log("findbyId ", res)
+      
       if (res && res.data){
         // this.setState({article: res.data, fileList:[{url: `http://127.0.0.1:3000/${res.data.mainPic}`,uid :id}]})
-        this.setState({article: res.data, fileList:[{url: res.data.mainPic,uid :id}]})
+        let isMarkdown = this.state.isMarkdown
+        if (res.data.markdown) {
+          isMarkdown= true
+        }
+        this.setState({article: res.data, fileList:[{url: res.data.mainPic,uid :id}],isMarkdown: isMarkdown})
       }
     })
   }
@@ -58,13 +69,19 @@ class NEArticle extends React.Component {
         return
       }
       const {id} =  this.props;
-      console.log(values, "121212",this.state)
+     
       const mainPic = this.state.fileList[0] && (this.state.fileList[0].response && this.state.fileList[0].response.url || this.state.fileList[0].url)
-      // const mainpic = values && values.mainPic && values.mainPic[0] && values.mainPic[0].response && values.mainPic[0].response.url 
-      console.log(mainPic, "1212")
-      
+    
+      let content = values.content;
+      let markdown = values.markdown;
+      if (typeof content == "object") {
+        markdown = content.markdown
+        content = content.html
+      }
+      values.content = content;
+      values.markdown = markdown
       values.mainPic = mainPic;
-      console.log(values)
+  
         // 编辑
       if (id) {
         article.update(id, values).then(res=>{
@@ -73,9 +90,7 @@ class NEArticle extends React.Component {
               })  
       }else{
         // 创建
-        console.log("我呀哦创建看了")
         article.create(values).then((res)=>{
-          console.log("res", res)
           message.success("创建成功")
           // this.props.form.resetFields();
         
@@ -118,8 +133,6 @@ class NEArticle extends React.Component {
 
 
   handleChange = ({ fileList }) =>{
-    console.log(fileList, "123你大爷222");
-    // this.props.onChange(fileList)
     this.setState({ fileList })
   }
 
@@ -131,7 +144,7 @@ class NEArticle extends React.Component {
       previewVisible: true,
     });
   }
-
+  contentChange = (content) => {}
 
   render() {
     const { form:{getFieldDecorator}, id } = this.props;
@@ -159,7 +172,6 @@ class NEArticle extends React.Component {
         },
       },
     };
-
     return (
       <Form onSubmit={this.handleSubmit}>
        <FormItem
@@ -205,9 +217,12 @@ class NEArticle extends React.Component {
           {...formItemLayout}
         >
           {getFieldDecorator('content', {
-            initialValue: article.content
+            initialValue: article.markdown ?({
+              html : article.content,
+              markdown : article.markdown,
+            }): (article.content)
           })(
-            <MyEditor></MyEditor>
+            <MyEditor isMarkdown={this.state.isMarkdown}  buttonClick = {this.buttonClick.bind(this)}></MyEditor>
           )}
         </FormItem>
         <FormItem

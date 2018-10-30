@@ -69,7 +69,7 @@ class ArticleList extends React.Component{
 
 
   edit = (record)=>{
-    console.log(record)
+  
     if (record && record.id) {
       const url = `/admin/articles/${record.id}`;
     router.push(url);
@@ -87,7 +87,7 @@ class ArticleList extends React.Component{
   }
 
   deleteRows = () => {
-    console.log(this.state.selectedRowKeys, "12121")
+   
     const {selectedRowKeys} = this.state;
     if (selectedRowKeys.length == 0){
         return message.error("无行选择");
@@ -125,7 +125,7 @@ class ArticleList extends React.Component{
     }, 1000);
   }
   onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
+
     this.setState({ selectedRowKeys });
   }
   render() {

@@ -68,7 +68,7 @@ class CategoryList extends React.Component{
   fetch =()=>{
      this.setState({loading: true})
       category.find().then(res=>{
-        console.log("data", res)
+    
         const {data=[], total} = res
         this.setState({articles: data, total: total})
       }).finally(err=>{
@@ -128,10 +128,7 @@ class CategoryList extends React.Component{
               })  
       }else{
         // 创建
-        console.log("我呀哦创建看了")
         category.create(values).then((res)=>{
-          console.log("res", res)
-          message.success("创建成功")
           this.fetch()
           form.resetFields();
           this.setState({ visible: false, selectRecord:{}});
@@ -144,7 +141,7 @@ class CategoryList extends React.Component{
     console.log(234)
   }
   handleCancel = (e) => {
-    console.log(e);
+  
     this.setState({
       visible: false,
     });

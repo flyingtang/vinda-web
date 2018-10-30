@@ -35,7 +35,7 @@ export async function deleteAll(ids){
 export async function deleteOne(id){
  
   const url = `${prefixUrl}/${id}`;
-  console.log(id, url)
+
   const options = {
     method: "delete",
   }

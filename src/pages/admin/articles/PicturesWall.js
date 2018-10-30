@@ -19,11 +19,7 @@ class PicturesWall extends React.Component {
       previewVisible: true,
     });
   }
-  // handleChange = ({ fileList }) =>{
-  //   console.log(fileList, "123");
-  //   this.props.onChange(fileList)
-  //   this.setState({ fileList })
-  // }
+
   render() {
     const { previewVisible, previewImage} = this.state;
 
@@ -34,12 +30,11 @@ class PicturesWall extends React.Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-    const actionUrl = `/api/v1/upload?authorization=${cookie.load("token")}`
-    console.log(actionUrl, "actionUrl")
+  
     return (
       <div className="clearfix">
         <Upload
-          action={actionUrl}
+          action={`/api/v1/upload?authorization=${cookie.load("token")}`}
           listType="picture-card"
           fileList={fileList}
           onPreview={this.handlePreview}

@@ -19,7 +19,7 @@ class LoginForm extends React.Component {
       }
       account.login(values).then(res=>{
         this.props.form.resetFields();
-        console.log(res, "2312")
+      
         // 存token
         if(res){
             cookie.save("token", res.token, { path: '/', maxAge: 3600*24})
