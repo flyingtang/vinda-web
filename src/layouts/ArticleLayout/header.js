@@ -5,7 +5,7 @@ export default class Header extends React.Component{
         return (
         <div className={styles["header"]}>
             <div className={styles["menu"]}> <Link to="/article">文章</Link> </div>
-            <div className={styles["menu"]}><Link to="/vedio">视频</Link> </div>
+            <div className={styles["menu"]}><a href="http://go-learn.ixiaotang.cn">Golang学习笔记</a> </div>
         </div>
         )
     }
