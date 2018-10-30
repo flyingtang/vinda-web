@@ -46,7 +46,7 @@ export default class RightSider extends React.Component {
                       header={<div className={styles["name"]}>热门</div>}
                       bordered
                       dataSource={hostArticls}
-                      renderItem={item => (<List.Item><Link to="">{item.title}</Link></List.Item>)}
+                      renderItem={item => (<List.Item><Link to={`/article/${item.id}`}>{item.title}</Link></List.Item>)}
                  />
             </div>
         )
