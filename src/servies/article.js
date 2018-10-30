@@ -8,6 +8,7 @@ const prefixUrl = "/article"
 export async function find(){
     return request(prefixUrl) 
 }
+
 export async function update(id, values){
   return request(`${prefixUrl}/${id}`, {
     method: 'PATCH',
