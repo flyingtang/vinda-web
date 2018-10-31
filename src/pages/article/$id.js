@@ -1,6 +1,8 @@
 import * as article  from "../../servies/article"
 import {message} from "antd"
 import styles from  "./index.less"
+import "./imageload"
+
 
 export default class Article extends React.Component {
 
