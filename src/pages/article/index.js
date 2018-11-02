@@ -1,26 +1,30 @@
 
 import ArticleSnapshot from "./articleSnapshot"
 import * as article  from "../../servies/article"
+import { Pagination } from 'antd';
+import styles from "./index.less"
 
 class ArticlsList extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             page: 1,
-            articles: []
+            articles: [],
+            total: 0,
         }
     }
     componentDidMount(){
-        this.fetch(1)
+        this.fetch({order: "createdAt desc"})
         if (this.contentNode) {
             this.contentNode.addEventListener('scroll', this.onScrollHandle.bind(this));
           }
     }
 
-    fetch = (page)=>{
-        article.find().then(res=>{
+    fetch = (filter)=>{
+        console.log(filter, "12212")
+        article.find(filter).then(res=>{
             if (res && res.data){
-                this.setState({articles: res.data})
+                this.setState({articles: res.data, total: res.total})
             }
         })
     }
@@ -40,14 +44,20 @@ class ArticlsList extends React.Component{
         }
       }
 
+      handleChange = (page, pageSize) => {
+        this.fetch({page:page})
+      }
     render(){
-        const {articles} = this.state;
-        return (<div ref={ node => this.contentNode = node }>
+        const {articles, total} = this.state;
+        return (<div >
             {
                 articles.map(art => {
                    return  <ArticleSnapshot key={art.id} article={art} />
                 })
             }
+            <div className={styles["pagination"]}>
+            <Pagination onChange={this.handleChange.bind(this)} defaultCurrent={1} total={total} />
+            </div> 
         </div>
         )
     }

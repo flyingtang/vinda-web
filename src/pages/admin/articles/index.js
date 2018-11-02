@@ -14,6 +14,7 @@ class ArticleList extends React.Component{
       selectedRowKeys: [], // Check here to configure the default column
       loading: false,
       data: [],
+      total: 0,
     }
   }
   columns = [{
@@ -22,12 +23,13 @@ class ArticleList extends React.Component{
     width: 300,
   }, {
     title: '作者',
-    dataIndex: 'authod',
+    dataIndex: 'author',
     width: 100,
   }, {
     title: '浏览数',
     dataIndex: 'visit_count',
     width: 100,
+    render: ()=>0
   }, {
     title: '创建时间',
     dataIndex: 'createdAt',
@@ -67,6 +69,13 @@ class ArticleList extends React.Component{
      this.fetch()
   }
 
+  changeHandle = ({current, pageSize, total}, filters, sorter) => {
+
+    if (!current) {
+      current = 1;
+    }
+    this.fetch({page:current})
+  }
 
   edit = (record)=>{
   
@@ -103,11 +112,11 @@ class ArticleList extends React.Component{
   create = ()=>{
     router.push('/admin/articles/new');
   }
-  fetch(){
+  fetch(filter){
      this.setState({loading: true})
-     article.find().then((res)=>{
+     article.find(filter).then((res)=>{
         if (res && res.data){
-            this.setState({data: res.data})
+            this.setState({data: res.data, total: res.total})
         }
         // message.success(res && res.message)
      }).finally(()=>{
@@ -129,7 +138,7 @@ class ArticleList extends React.Component{
     this.setState({ selectedRowKeys });
   }
   render() {
-    const { loading, selectedRowKeys, data} = this.state;
+    const { loading, selectedRowKeys, data, total} = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -152,7 +161,7 @@ class ArticleList extends React.Component{
             创建
           </Button>
         </div>
-        <Table rowKey={record => record.id} loading={loading}  rowSelection={rowSelection} columns={this.columns} dataSource={data}  />
+        <Table rowKey={record => record.id} onChange={this.changeHandle.bind(this)} loading={loading} pagination={{total:total}} rowSelection={rowSelection} columns={this.columns} dataSource={data}  />
       </div>
     );
   }

@@ -10,7 +10,7 @@ export default class ArticleSnapshot extends React.Component {
         router.push(url)
     }
     render(){
-        const {article:{title, mainPic, description, createdAt, id, author}={}} = this.props;
+        const {article:{title, mainPic, description, createdAt, id, author, category}={}} = this.props;
         return (
         <div className={styles["snapshot"]} onClick={this.cliickHancle.bind(this, id)} >
             <div className={styles["row1"]}>
@@ -22,7 +22,7 @@ export default class ArticleSnapshot extends React.Component {
                         <div className={styles["desc"]}>{description}</div>
                         <div className={styles["row3"]}>
                             <div className={styles["category"]}>作者 :{author}</div>
-                            <div className={styles["comments"]}>分类</div>
+                            <div className={styles["comments"]}>分类:{category}</div>
                             <div className="createdAt">时间： {createdAt && moment(createdAt).format("YYYY-MM-DD HH:mm:ss")||moment().format("YYYY-MM-DD HH:mm:ss")}</div>
                         </div>
                     </div>

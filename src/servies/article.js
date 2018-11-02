@@ -5,8 +5,15 @@ import path from "path"
 const prefixUrl = "/article"
 
 
-export async function find(){
-    return request(prefixUrl) 
+export async function find(filter={}){
+  console.log(filter, "333")
+  filter  = Object.assign({}, {page: 1}, filter)
+    let url = prefixUrl
+    console.log(filter, JSON.stringify(filter));
+
+    url += `?filter=${JSON.stringify(filter)}`
+    console.log(url, "1-212")
+    return request(url) 
 }
 
 export async function update(id, values){

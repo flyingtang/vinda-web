@@ -24,7 +24,8 @@ export default class RightSider extends React.Component {
                 this.setState({categories: res.data})
             }
         })
-        article.find().then(res=>{
+        // 获取热门文章
+        article.find({order: "createdAt desc"}).then(res=>{
             if (res && res.data){
                 this.setState({hostArticls: res.data})
             }
