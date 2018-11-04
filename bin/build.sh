@@ -2,7 +2,7 @@
 
 docker login --username=txg5214 registry-vpc.cn-shenzhen.aliyuncs.com
 
-npm run build
+# npm run build
 
 docker build -t vinda-web .
 
