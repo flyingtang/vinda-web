@@ -11,3 +11,8 @@ export async function login(data){
     const url = path.join(prefixUrl, "login")
     return request(url, options)
 }
+
+export async function me(){
+  const url = path.join(prefixUrl, "me")
+  return request(url)
+}

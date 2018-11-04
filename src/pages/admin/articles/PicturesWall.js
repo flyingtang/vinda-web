@@ -7,7 +7,6 @@ class PicturesWall extends React.Component {
     this.state = {
       previewVisible: false,
       previewImage: '',
-      
     };
   }
   
@@ -20,26 +19,30 @@ class PicturesWall extends React.Component {
     });
   }
 
+  // TODO 移除操作
+
+
   render() {
     const { previewVisible, previewImage} = this.state;
 
-    const {handleChange, fileList=[]} = this.props;
+    const {handleChange, fileList=[], actionUrl, listType="picture-card", handleRemove} = this.props;
     const uploadButton = (
       <div>
         <Icon type="plus" />
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-  
+
     return (
       <div className="clearfix">
         <Upload
-          action={`/api/v1/upload?authorization=${cookie.load("token")}`}
-          listType="picture-card"
+          action={`${actionUrl}?authorization=${cookie.load("token")}`}
+          listType={listType}
           fileList={fileList}
           onPreview={this.handlePreview}
           // onChange={this.handleChange}
           onChange={handleChange}
+          onRemove = {handleRemove}
         >
           {fileList.length >= 1 ? null : uploadButton}
         </Upload>

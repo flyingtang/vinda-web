@@ -1,22 +1,44 @@
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon , Avatar} from 'antd';
 import  styles from './SiderLayout.css';
 const { Header, Sider, Content } = Layout;
 import Link from 'umi/link';
 import Breadcrumb from "./Breakcrumbs"
+import * as account from "../../servies/account"
 
 class SiderLayout extends React.Component {
-  state = {
-    collapsed: false,
-  };
+ 
+  constructor(props){
+    super(props)
+    this.state = {
+      collapsed: false,
+      user : {}
+    }
+  }
 
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
     });
   }
-
+  componentDidMount(){
+    console.log("获取用户信息")
+    account.me().then(res=>{
+      console.log("me", res)
+      if (res && res.data){
+        this.setState({user: res.data})
+      }
+    })
+  }
   render() {
+    console.log(this.state, "stta")
+    const {user} = this.state;
     return (
+      <Layout>
+        <Header>
+          <div className={styles["header"]}> 
+            <Avatar size="large" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }} src={user && user.avatar} >{user && user.username} </Avatar>
+          </div>
+        </Header>
       <Layout className="adminLayout" >
         <Sider
           trigger={null}
@@ -26,16 +48,20 @@ class SiderLayout extends React.Component {
           <div className={styles["logo"]} />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="articles">
-              <Icon type="user" />
+              <Icon type="file" />
               <span><Link to="/admin/articles">文章管理</Link></span>
             </Menu.Item>
             <Menu.Item key="category">
-              <Icon type="video-camera" />
+              <Icon type="hdd" />
               <span><Link to="/admin/category">分类管理</Link></span>
             </Menu.Item>
             <Menu.Item key="users">
-              <Icon type="video-camera" />
+              <Icon type="user" />
               <span><Link to="/admin/articles">账户管理</Link></span>
+            </Menu.Item>
+            <Menu.Item key="video">
+              <Icon type="video-camera" />
+              <span><Link to="/admin/videos">视频管理</Link></span>
             </Menu.Item>
           </Menu>
         </Sider>
@@ -52,6 +78,7 @@ class SiderLayout extends React.Component {
             {this.props.children}
           </Content>
         </Layout>
+      </Layout>
       </Layout>
     );
   }

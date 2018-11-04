@@ -3,16 +3,23 @@ import SiderLayout from "./AdminLayout/SiderLayout"
 import cookie from 'react-cookies'
 import router from 'umi/router';
 import Article from "./ArticleLayout/articleLayout"
+import VideoLayou from "./VideoLayout/index"
 function BasicLayout(props) {
 
   const url = props.location.pathname
-
+  console.log(url.indexOf("/video"))
   if (url=="/"){
     router.push("/article")
 
-  } else if (url == "/admin") {
+  }else if (url.indexOf("/video") > -1 && url.indexOf("/video") < 2){
+    return (
+         <VideoLayou >
+           {props.children}
+         </VideoLayou>
+    )
+  }
+  else if (url == "/admin") {
     router.push("/admin/articles")
-    
   } else if (url.indexOf("/admin") > -1) {
     return (
          <SiderLayout>

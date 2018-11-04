@@ -23,6 +23,7 @@ class NEArticle extends React.Component {
     categories: [],
     fileList:[],
     isMarkdown: false,
+    actionUrl: "/api/v1/upload",
     };
   }
   
@@ -148,7 +149,7 @@ class NEArticle extends React.Component {
 
   render() {
     const { form:{getFieldDecorator}, id } = this.props;
-    const { article, categories } = this.state;
+    const { article, categories, actionUrl } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -232,7 +233,7 @@ class NEArticle extends React.Component {
           {getFieldDecorator('mainPic', {
             initialValue: article.mainPic
           })(
-            <PicturesWall fileList={this.state.fileList} handleChange={this.handleChange}/>
+            <PicturesWall actionUrl={actionUrl} fileList={this.state.fileList} handleChange={this.handleChange}/>
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
