@@ -31,5 +31,5 @@ export default {
       "changeOrigin": true
     },
   },
-  // base: '/usr/share/nginx/html'
+  "publicPath": "./",
 }
