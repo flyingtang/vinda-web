@@ -32,4 +32,5 @@ export default {
     },
   },
   base: '/usr/share/nginx/html',
+  publicPath: '/usr/share/nginx/html'
 }
