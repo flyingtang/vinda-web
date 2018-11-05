@@ -30,5 +30,6 @@ export default {
       "target": "http://ixiaotang.cn:3000",
       "changeOrigin": true
     },
-},
+  },
+  base: '/usr/share/nginx/html',
 }
