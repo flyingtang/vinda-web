@@ -9,7 +9,6 @@ WORKDIR /usr/share/nginx/html
 RUN mkdir -p /usr/share/nginx/html/admin &&  mkdir -p /usr/share/nginx/html/static
  
 COPY ./dist /usr/share/nginx/html/
-COPY ./dist /usr/share/nginx/html/admin/
 COPY ./dist/static /usr/share/nginx/html/static/
 COPY ./nginx.conf /etc/nginx/conf.d/
 

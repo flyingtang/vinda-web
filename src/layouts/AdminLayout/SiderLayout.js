@@ -33,7 +33,7 @@ class SiderLayout extends React.Component {
     console.log(this.state, "stta")
     const {user} = this.state;
     return (
-      <Layout>
+      <Layout className="adminLayout"  >
         <Header>
           <div className={styles["header"]}> 
             <Avatar size="large" style={{ color: '#f56a00', backgroundColor: '#fde3cf' }} src={user && user.avatar} >{user && user.username} </Avatar>
