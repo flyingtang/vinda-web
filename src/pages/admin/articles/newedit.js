@@ -69,6 +69,7 @@ class NEArticle extends React.Component {
       if (err) {
         return
       }
+      console.log(values, "000")
       const {id} =  this.props;
      
       const mainPic = this.state.fileList[0] && (this.state.fileList[0].response && this.state.fileList[0].response.url || this.state.fileList[0].url)
@@ -79,10 +80,10 @@ class NEArticle extends React.Component {
         markdown = content.markdown
         content = content.html
       }
-      values.content = content;
+      values.content = `<div class="mde-preview "> <div class="mde-preview-content">${content}</div> </div>`;
       values.markdown = markdown
       values.mainPic = mainPic;
-  
+      console.log(values, "1111")
         // 编辑
       if (id) {
         article.update(id, values).then(res=>{

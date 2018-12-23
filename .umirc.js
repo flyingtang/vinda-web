@@ -6,8 +6,8 @@ export default {
     ['umi-plugin-react', {
       antd: true,
       dva: true,
-      dynamicImport: false,
-      title: 'blog-web',
+      dynamicImport: true,
+      title: '我的博客',
       dll: false,
       routes: {
         exclude: [],
