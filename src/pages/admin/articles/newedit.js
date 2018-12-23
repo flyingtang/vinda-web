@@ -69,7 +69,6 @@ class NEArticle extends React.Component {
       if (err) {
         return
       }
-      console.log(values, "000")
       const {id} =  this.props;
      
       const mainPic = this.state.fileList[0] && (this.state.fileList[0].response && this.state.fileList[0].response.url || this.state.fileList[0].url)
