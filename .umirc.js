@@ -31,5 +31,5 @@ export default {
       "changeOrigin": true
     },
   },
-  "publicPath": "/",
+  "publicPath": "./",
 }
