@@ -6,7 +6,7 @@ export default {
     ['umi-plugin-react', {
       antd: true,
       dva: true,
-      dynamicImport: false,
+      dynamicImport: true,
       title: '我的博客',
       dll: false,
       routes: {
@@ -31,5 +31,5 @@ export default {
       "changeOrigin": true
     },
   },
-  "publicPath": "./",
+  "publicPath": "/",
 }
